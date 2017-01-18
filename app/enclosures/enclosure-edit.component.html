@@ -1,0 +1,134 @@
+<form #editEnclosureForm="ngForm" *ngIf="enclosureLoaded" novalidate>
+    <div class="alert alert-danger" [hidden]="editEnclosureForm.form.valid">
+        <ul *ngIf="lengthIn.dirty && !lengthIn.valid">
+            <li>Length (in) is required </li>
+        </ul>
+        <ul *ngIf="widthIn.dirty && !widthIn.valid">
+            <li>Width (in) is required </li>
+        </ul>
+        
+    </div>
+ 
+    <button type="button" class="btn btn-danger" (click)="back()">
+        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>Back</button>
+    <button type="button" [disabled]="!editEnclosureForm.form.valid" class="btn btn-default" (click)="updateEnclosure(editEnclosureForm)">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update</button>
+ 
+    <hr/>
+ 
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-2">
+                <label class="control-label">Length (in)</label>
+                <input type="text" class="form-control" [(ngModel)]="enclosure.lengthIn" name="lengthIn" #lengthIn="ngModel" required />
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label">Width (in)</label>
+                <input type="text" class="form-control" [(ngModel)]="enclosure.widthIn" name="widthIn" #widthIn="ngModel" required  />
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label">Depth (in)</label>
+                <input type="text" class="form-control" [(ngModel)]="enclosure.depthIn" name="depthIn" #depthIn="ngModel" required  />
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">Length (mm)</label>
+                <input type="text" class="form-control" [(ngModel)]="enclosure.lengthMm" name="lengthMm" #lengthMm="ngModel" required />
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label">Width (mm)</label>
+                <input type="text" class="form-control" [(ngModel)]="enclosure.widthMm" name="widthMm" #widthMm="ngModel" required  />
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label">Depth (mm)</label>
+                <input type="text" class="form-control" [(ngModel)]="enclosure.depthMm" name="depthMm" #depthMm="ngModel" required  />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                <label class="control-label">Material</label>
+                <select class="form-control" [(ngModel)]="enclosure.material" name="material">
+                    <option *ngFor="let material of materialList" [value]="material">{{material}}</option>
+                </select>
+            </div>
+ 
+            <div class="col-md-4 selectContainer">
+                <label class="control-label">Ingress Protection</label>
+                <select class="form-control" [(ngModel)]="enclosure.ingressProtection" name="ingress">
+                    <option *ngFor="let ingress of ingressList" [value]="ingress">{{ingress}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 selectContainer">
+                <label class="control-label">Series</label>
+                <select class="form-control" [(ngModel)]="enclosure.series" name="serie">
+                    <option *ngFor="let serie of seriesList" [value]="serie">{{serie}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                <label class="control-label">Outdoor Use</label>
+                <div>
+                    <input type="radio" name="outdoorUse" [(ngModel)]="enclosure.outdoorUse" [value]="true"> Yes
+                    <input type="radio" name="outdoorUse" [(ngModel)]="enclosure.outdoorUse" [value]="false"> No
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">UL Approval</label>
+                <div>
+                    <input type="radio" name="ulApproval" [(ngModel)]="enclosure.ulApproval" [value]="true"> Yes
+                    <input type="radio" name="ulApproval" [(ngModel)]="enclosure.ulApproval" [value]="false"> No
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Nema 4X</label>
+                <div>
+                    <input type="radio" name="nema4X" [(ngModel)]="enclosure.nema4X" [value]="true"> Yes
+                    <input type="radio" name="nema4X" [(ngModel)]="enclosure.nema4X" [value]="false"> No
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                <label class="control-label">Enclosure Image</label>
+                <img src="{{enclosure.imageUrl}}" class="img-responsive" alt="">
+                <input type="text" class="form-control" [(ngModel)]="enclosure.imageUrl" name="imageUrl" #depthMm="ngModel" required  />
+            </div>
+            <div class="col-md-8">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Attached Files</div>
+                    <p>
+                        <a href="{{enclosure.pdfUrl}}" target="_blank">
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF Link
+                        </a>
+                        <input type="text" class="form-control" [(ngModel)]="enclosure.pdfUrl" name="pdfUrl" #depthMm="ngModel" required  />
+                    </p>
+                    <p>
+                        <a href="{{enclosure.drawingUrl}}" target="_blank">
+                            <i class="fa fa-file-photo-o" aria-hidden="true"></i> Drawing Link
+                        </a>
+                        <input type="text" class="form-control" [(ngModel)]="enclosure.drawingUrl" name="drawingUrl" #depthMm="ngModel" required  />
+                    </p>
+                    <p>
+                        <a href="{{enclosure.modelUrl}}" target="_blank">
+                            <i class="fa fa-file-o" aria-hidden="true"></i> Model Link
+                        </a>
+                        <input type="text" class="form-control" [(ngModel)]="enclosure.modelUrl" name="modelUrl" #depthMm="ngModel" required  />
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
