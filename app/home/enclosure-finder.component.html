@@ -1,0 +1,21 @@
+<div>
+    <button type="button" class="btn btn-danger" (click)="back()">
+        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>Back
+    </button>
+    <button type="button" class="btn btn-primary" *ngIf="enclosures">
+        <i class="fa fa-calendar" aria-hidden="true"></i> Enclosures found  
+        <span class="badge">{{totalItems}}</span>
+    </button>
+</div>
+<hr/>
+<div class="alert alert-danger" *ngIf="enclosuresNotFound">
+    Unfortunately we could find no enclosures which match to your criteria.
+</div>
+<div class="row" *ngFor="let enclosure of enclosures">
+    <enclosure-card [enclosure]="enclosure"></enclosure-card>
+</div>
+<div class="row text-center">
+    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" class="pagination-sm"
+        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)"></pagination>
+</div>
+

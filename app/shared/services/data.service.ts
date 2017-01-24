@@ -6,7 +6,7 @@ import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
  
-import { IEnclosure, Pagination, PaginatedResult } from '../interfaces';
+import { IEnclosure, IFilter, Pagination, PaginatedResult } from '../interfaces';
 import { ItemsService } from '../utils/items.service';
 import { ConfigService } from '../utils/config.service';
  
@@ -14,6 +14,7 @@ import { ConfigService } from '../utils/config.service';
 export class DataService {
  
     _baseUrl: string = '';
+    _partNumberToFind: string = '';
  
     constructor(private http: Http,
         private itemsService: ItemsService,
@@ -21,6 +22,14 @@ export class DataService {
         this._baseUrl = configService.getApiURI();
     }
  
+    setPartNumber(partNumberToFind: string){
+        this._partNumberToFind = partNumberToFind;
+    }
+
+    getPartNumberToFind(){
+        return this._partNumberToFind;
+    }
+
     getEnclosures(page?: number, itemsPerPage?: number): Observable<PaginatedResult<IEnclosure[]>> {
         var peginatedResult: PaginatedResult<IEnclosure[]> = new PaginatedResult<IEnclosure[]>();
  
@@ -33,6 +42,59 @@ export class DataService {
             headers: headers
         })
             .map((res: Response) => {
+                console.log(res.headers.keys());
+                peginatedResult.result = res.json();
+ 
+                if (res.headers.get("Pagination") != null) {
+                    //var pagination = JSON.parse(res.headers.get("Pagination"));
+                    var paginationHeader: Pagination = this.itemsService.getSerialized<Pagination>(JSON.parse(res.headers.get("Pagination")));
+                    console.log(paginationHeader);
+                    peginatedResult.pagination = paginationHeader;
+                }
+                return peginatedResult;
+            })
+            .catch(this.handleError);
+    }
+
+    getEnclosuresByPartNumber(partNumberToFind: string, page?: number, itemsPerPage?: number): Observable<PaginatedResult<IEnclosure[]>> {
+        var peginatedResult: PaginatedResult<IEnclosure[]> = new PaginatedResult<IEnclosure[]>();
+ 
+        let headers = new Headers();
+        if (page != null && itemsPerPage != null) {
+            headers.append('Pagination', page + ',' + itemsPerPage);
+        }
+ 
+        return this.http.get(this._baseUrl + 'enclosures/search?partNumber=' + partNumberToFind, {
+            headers: headers
+        })
+            .map((res: Response) => {
+                console.log(res.headers.keys());
+                peginatedResult.result = res.json();
+ 
+                if (res.headers.get("Pagination") != null) {
+                    //var pagination = JSON.parse(res.headers.get("Pagination"));
+                    var paginationHeader: Pagination = this.itemsService.getSerialized<Pagination>(JSON.parse(res.headers.get("Pagination")));
+                    console.log(paginationHeader);
+                    peginatedResult.pagination = paginationHeader;
+                }
+                return peginatedResult;
+            })
+            .catch(this.handleError);
+    }
+
+    filterEnclosures(filterObj: IFilter, page?: number, itemsPerPage?: number, partNumber?: string): Observable<PaginatedResult<IEnclosure[]>> {
+        var peginatedResult: PaginatedResult<IEnclosure[]> = new PaginatedResult<IEnclosure[]>();
+ 
+        let headers = new Headers();
+        if (page != null && itemsPerPage != null) {
+            headers.append('Pagination', page + ',' + itemsPerPage);
+        }
+        headers.append('Content-Type', 'application/json');
+ 
+        return this.http.post(this._baseUrl + 'enclosures/filter', JSON.stringify(filterObj), {
+            headers: headers
+        })
+        .map((res: Response) => {
                 console.log(res.headers.keys());
                 peginatedResult.result = res.json();
  

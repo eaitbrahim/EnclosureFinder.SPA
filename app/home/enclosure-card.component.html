@@ -1,0 +1,74 @@
+<div class="panel panel-primary" [@flyInOut]="'in'">
+    <div class="panel-heading">
+        <h3 class="panel-title pull-left">{{enclosure.partNumber}}</h3>
+        <div class="clearfix"></div>
+    </div>
+ 
+    <div highlight="whitesmoke" class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{enclosure.imageUrl}}" class="img-responsive img-avatar" alt="EnclosureImage">
+            </div>
+
+            <div class="col-md-8 caption">
+                <p>{{enclosure.typeNumber}}</p>
+                <p>{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}} mm</p>
+                <p>{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}} in</p>
+                <p>{{enclosure.ingressProtection}}</p>
+                <div [class.hidden]="!(enclosure.ulApproval)"><span class="badge">UL</span></div>
+                <p>{{enclosure.description}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div>
+            <button class="btn btn-primary" (click)="viewEnclosureDetails(enclosure.id)">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>Details</button>  
+        </div>
+    </div>
+</div>
+
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" *ngIf="selectedEnclosureLoaded">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="hideChildModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title">{{enclosureDetails.partNumber}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{enclosureDetails.imageUrl}}" class="img-responsive" alt="">
+                    </div>
+
+                    <div class="col-md-4">
+                        <p>{{enclosureDetails.typeNumber}}</p>
+                        <p>{{enclosureDetails.lengthIn}} x {{enclosureDetails.widthIn}} x {{enclosureDetails.depthIn}} in</p>
+                        <p>{{enclosureDetails.lengthMm}} x {{enclosureDetails.widthMm}} x {{enclosureDetails.depthMm}} mm</p>
+                        <p>{{enclosureDetails.material}}</p>
+                        <p>{{enclosureDetails.ingressProtection}}</p>
+                        <p>{{enclosureDetails.series}}</p>
+                        <p>{{enclosureDetails.description}}</p>
+                        <div [class.hidden]="!(enclosure.ulApproval)"><span class="badge">UL</span></div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div>
+                            <p>Outdoor Use: {{enclosureDetails.outdoorUse ? 'Yes' : 'No'}}</p>
+                            <p>UL Approval: {{enclosureDetails.ulApproval ? 'Yes' : 'No'}}</p>
+                            <p>Nema 4X: {{enclosureDetails.nema4X ? 'Yes' : 'No'}}</p>
+                        </div>
+                        <div class="panel panel-info">
+                            <div class="panel-heading">Attached Files</div>
+                            <p><a href="{{enclosureDetails.pdfUrl}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF Link</a></p>
+                            <p><a href="{{enclosureDetails.drawingUrl}}" target="_blank"><i class="fa fa-file-photo-o" aria-hidden="true"></i> Drawing Link</a></p>
+                            <p><a href="{{enclosureDetails.modelUrl}}" target="_blank"><i class="fa fa-file-o" aria-hidden="true"></i> Model Link</a></p>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>

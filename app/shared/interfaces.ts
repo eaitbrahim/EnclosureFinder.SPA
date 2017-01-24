@@ -23,6 +23,23 @@ export interface IEnclosure {
      ingressList: string[];
      seriesList: string[];
 }
+
+export interface IFilter {
+     minLength?: number;
+     minWidth?: number;
+     minDepth?: number;
+     maxLength?: number;
+     maxWidth?: number;
+     maxDepth?: number;
+     dimensionUnit: string
+     partNumber: string;
+     materialList: string[];
+     ingressList: string[];
+     seriesList: string[];
+     outdoorUse?: boolean;
+     ulApproval?: boolean;
+     nema4X?: boolean;
+}
  
 export interface Pagination {
     CurrentPage : number;

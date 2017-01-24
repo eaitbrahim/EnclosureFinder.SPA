@@ -1,0 +1,96 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title pull-left">Filter</h3>
+        <div class="clearfix"></div>
+    </div>
+ 
+    <div class="panel-body">
+        <form #filterForm="ngForm" novalidate>
+            <accordion>
+                <accordion-group heading="Part Number" [isOpen]="isFirstOpen" >
+                    <div class="form-group">
+                        <div class="row">
+                            <div>
+                                <input type="text" placeholder="Search by Part Number" name="partNumber" [(ngModel)]="filterObj.partNumber" />
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>
+            
+                <accordion-group heading="Dimensions" [isOpen]="isOpen">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="radio" name="dimensionUnit" [(ngModel)]="filterObj.dimensionUnit" [value]="in"> inch
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="dimensionUnit" [(ngModel)]="filterObj.dimensionUnit" [value]="mm"> millimeter
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="control-label">Min Length (L)</label>
+                                        <input type="number" name="minLength" class="form-control" [(ngModel)]="filterObj.minLength" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label">Max Length (L)</label>
+                                        <input type="number" name="maxLength" class="form-control" [(ngModel)]="filterObj.maxLength"  />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="control-label">Min Width (W)</label>
+                                        <input type="number" name="minWidth" class="form-control" [(ngModel)]="filterObj.minWidth" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label">Max Width (W)</label>
+                                        <input type="number" name="maxWidth" class="form-control" [(ngModel)]="filterObj.maxWidth"  />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="control-label">Min Depth (D)</label>
+                                        <input type="number" name="minDepth" class="form-control" [(ngModel)]="filterObj.minDepth" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label">Max Depth (D)</label>
+                                        <input type="number" name="maxDepth" class="form-control" [(ngModel)]="filterObj.maxDepth"  />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="../assets/images/dimensions.png" alt="dimensions" width="50px" height="60px">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </accordion-group>
+
+                <accordion-group heading="Materials" [isOpen]="isOpen">
+                    This content 2
+                </accordion-group>
+
+                <accordion-group heading="Ingress Protection" [isOpen]="isOpen">
+                    This is just some content to illustrate fancy headings.
+                </accordion-group>
+
+                <accordion-group heading="Series" [isOpen]="isOpen">
+                    This content is straight in the template 1.
+                </accordion-group>
+
+                <accordion-group heading="Compliance & Certificates" [isOpen]="isOpen">
+                    This content is straight in the template 1.
+                </accordion-group>
+            </accordion>
+        </form>
+    </div>
+    <div class="panel-footer">
+        <div>
+            <button type="button" class="btn btn-default" (click)="searchByPartNumber()">
+                <i class="fa fa-search" aria-hidden="true"></i>Find Enclosures
+            </button>
+        </div>
+    </div>
+</div>

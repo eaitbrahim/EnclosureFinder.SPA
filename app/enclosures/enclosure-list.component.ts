@@ -17,7 +17,7 @@ import { IEnclosure, Pagination, PaginatedResult } from '../shared/interfaces';
  
 @Component({
     moduleId: module.id,
-    selector: 'app-enclosures',
+    selector: 'app-enclosuresList',
     templateUrl: 'enclosure-list.component.html',
     animations: [
         trigger('flyInOut', [
