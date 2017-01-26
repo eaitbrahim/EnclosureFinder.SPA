@@ -1,11 +1,27 @@
-<div>
-    <button type="button" class="btn btn-danger" (click)="back()">
-        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>Back
-    </button>
-    <button type="button" class="btn btn-primary" *ngIf="enclosures">
-        <i class="fa fa-calendar" aria-hidden="true"></i> Enclosures found  
-        <span class="badge">{{totalItems}}</span>
-    </button>
+<div class="row">
+    <div class="col-md-1">
+        <button type="button" class="btn btn-danger" (click)="back()">
+            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>Back
+        </button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary" *ngIf="enclosures">
+            <i class="fa fa-calendar" aria-hidden="true"></i> Enclosures found  
+            <span class="badge">{{totalItems}}</span>
+        </button>
+    </div>
+    <div class="col-md-8 panel panel-info">
+        <div class="row">
+            <strong>Search criteria:</strong>
+        </div>
+        <div class="row">
+            <div class="col-md-6" *ngFor="let criteria of criteriaList">
+                    <span class="label label-warning"> 
+                        <span class="glyphicon glyphicon-ok"> &nbsp; {{criteria}}</span>
+                    </span>
+            </div>
+        </div>
+    </div>
 </div>
 <hr/>
 <div class="alert alert-danger" *ngIf="enclosuresNotFound">
@@ -14,7 +30,7 @@
 <div class="row" *ngFor="let enclosure of enclosures">
     <enclosure-card [enclosure]="enclosure"></enclosure-card>
 </div>
-<div class="row text-center">
+<div class="row text-center" *ngIf="enclosures">
     <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" class="pagination-sm"
         previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)"></pagination>
 </div>

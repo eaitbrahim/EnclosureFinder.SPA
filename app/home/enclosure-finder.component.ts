@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IEnclosure, Pagination, PaginatedResult } from '../shared/interfaces';
+import { IEnclosure, IFilter, Pagination, PaginatedResult } from '../shared/interfaces';
 import { HighlightDirective } from '../shared/directives/highlight.directive';
 import { ModalDirective } from 'ng2-bootstrap';
 import { DataService } from '../shared/services/data.service';
@@ -17,9 +17,11 @@ import {EnclosureCardComponent} from './enclosure-card.component';
 export class EnclosureFinderComponent implements OnInit {
     @ViewChild('childModal') public childModal: ModalDirective;
     enclosures: IEnclosure[];
+    criteriaList: string[] = [];
     apiHost: string;
     searchMethod: string;
     partNumberToFind: string;
+    specificationsToFind: IFilter;
     enclosuresLoaded: boolean = false;
     enclosuresNotFound: boolean = false;
     public itemsPerPage: number = 3;
@@ -53,9 +55,12 @@ export class EnclosureFinderComponent implements OnInit {
         this.searchMethod = this.route.snapshot.params['searchMethod'];
         if(this.searchMethod == "ByPartNumber"){
             this.partNumberToFind = this.dataService.getPartNumberToFind();
+            this.criteriaList.push('Part Number contains ' + this.partNumberToFind);
             this.getEnclosuresByPartNumber();
         } else if(this.searchMethod == "BySpecifications"){
-
+            this.specificationsToFind = this.dataService.getSpecificationsToFind();
+            this.setCriteriaList(this.specificationsToFind);
+            this.getEnclosuresBySpecifications();
         }else{
             this.back();
         }
@@ -77,10 +82,67 @@ export class EnclosureFinderComponent implements OnInit {
             });
     }
  
+    getEnclosuresBySpecifications(){
+        this.dataService.filterEnclosures(this.specificationsToFind, this.currentPage, this.itemsPerPage)
+               .subscribe((res: PaginatedResult<IEnclosure[]>) => {
+                this.enclosures = res.result;// enclosures;
+                this.totalItems = res.pagination.TotalItems;
+                this.enclosuresLoaded = true;
+                if(this.totalItems == 0){
+                    this.enclosuresNotFound = true;
+                }
+                document.body.scrollTop = 0;
+            },
+            error => {
+                this.notificationService.printErrorMessage('Failed to load enclosures. ' + error);
+            });
+    }
+
+    setCriteriaList(filterObj: IFilter){
+        if(!!filterObj.minLength){
+            this.criteriaList.push(`${filterObj.minLength} ${filterObj.dimensionUnit} <= Min Length`);
+        }
+        if(!!filterObj.minWidth){
+            this.criteriaList.push(`${filterObj.minWidth} ${filterObj.dimensionUnit} <= Min Width`);
+        }
+        if(!!filterObj.minDepth){
+            this.criteriaList.push(`${filterObj.minDepth} ${filterObj.dimensionUnit} <= Min Depth`);
+        }
+        if(!!filterObj.maxLength){
+            this.criteriaList.push(`Max Length <= ${filterObj.maxLength} ${filterObj.dimensionUnit}`);
+        }
+        if(!!filterObj.maxWidth){
+            this.criteriaList.push(`Max Width <= ${filterObj.maxWidth} ${filterObj.dimensionUnit}`);
+        }
+        if(!!filterObj.maxDepth){
+            this.criteriaList.push(`Max Depth <= ${filterObj.maxDepth} ${filterObj.dimensionUnit}`);
+        }
+        if(!!filterObj.materialList && filterObj.materialList.length > 0){
+            this.criteriaList.push(`Material in [${filterObj.materialList.toString()}]`);
+        }
+        if(!!filterObj.ingressList && filterObj.ingressList.length > 0){
+            this.criteriaList.push(`Ingress Protection in [${filterObj.ingressList.toString()}]`);
+        }
+        if(!!filterObj.seriesList && filterObj.seriesList.length > 0){
+            this.criteriaList.push(`Series in [${filterObj.seriesList.toString()}]`);
+        }
+        if(!!filterObj.outdoorUse){
+            this.criteriaList.push(`Outdoor Use is ${filterObj.outdoorUse}`);
+        }
+        if(!!filterObj.ulApproval){
+            this.criteriaList.push(`UL Approval is ${filterObj.ulApproval}`);
+        }
+        if(!!filterObj.nema4X){
+            this.criteriaList.push(`NEMA 4X is ${filterObj.nema4X}`);
+        }
+    }
+
     pageChanged(event: any): void {
         this.currentPage = event.page;
         if(this.searchMethod == "ByPartNumber"){
             this.getEnclosuresByPartNumber();
+        }else{
+            this.getEnclosuresBySpecifications();
         }
     };
 

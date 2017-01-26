@@ -15,7 +15,8 @@ export class DataService {
  
     _baseUrl: string = '';
     _partNumberToFind: string = '';
- 
+    _specificationsToFind: IFilter;
+
     constructor(private http: Http,
         private itemsService: ItemsService,
         private configService: ConfigService) {
@@ -26,8 +27,16 @@ export class DataService {
         this._partNumberToFind = partNumberToFind;
     }
 
-    getPartNumberToFind(){
+    getPartNumberToFind(): string{
         return this._partNumberToFind;
+    }
+
+    setSpecificationsToFind(specificationsToFind: IFilter){
+        this._specificationsToFind = this.itemsService.getSerialized<IFilter>(specificationsToFind);
+    }
+
+    getSpecificationsToFind(): IFilter{
+        return this._specificationsToFind;
     }
 
     getEnclosures(page?: number, itemsPerPage?: number): Observable<PaginatedResult<IEnclosure[]>> {

@@ -32,7 +32,6 @@ export interface IFilter {
      maxWidth?: number;
      maxDepth?: number;
      dimensionUnit: string
-     partNumber: string;
      materialList: string[];
      ingressList: string[];
      seriesList: string[];

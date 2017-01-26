@@ -4,7 +4,7 @@
         <form #partNumberForm="ngForm" novalidate>
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title pull-left">Search by Part Number</h3>
+                    <h3 class="panel-title pull-left">Option 1: Search by Part Number</h3>
                     <div class="clearfix"></div>
                 </div>
                 <div class="panel-body">
@@ -24,6 +24,148 @@
     <hr/>
     <!--Search By Specifications-->
     <div class="row">
+        <form #specificationsForm="ngForm" novalidate>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title pull-left">Option 2: Search by Specifications</h3>
+                    <div class="clearfix"></div>
+                </div>
 
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading"><strong>Dimensions:</strong></div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label class="control-label">Unit of dimensions:</label>
+                                                        <select name="dimensionUnit" [(ngModel)]="filterObj.dimensionUnit">
+                                                            <option value="in">inch</option>
+                                                            <option value="mm" >millimeter</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Min Length (L):</label>
+                                                        <input type="number" name="minLength" class="form-control" [(ngModel)]="filterObj.minLength"/>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Max Length (L):</label>
+                                                        <input type="number" name="maxLength" class="form-control" [(ngModel)]="filterObj.maxLength"  />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Min Width (W):</label>
+                                                        <input type="number" name="minWidth" class="form-control" [(ngModel)]="filterObj.minWidth" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Max Width (W):</label>
+                                                        <input type="number" name="maxWidth" class="form-control" [(ngModel)]="filterObj.maxWidth"  />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Min Depth (D):</label>
+                                                        <input type="number" name="minDepth" class="form-control" [(ngModel)]="filterObj.minDepth" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Max Depth (D):</label>
+                                                        <input type="number" name="maxDepth" class="form-control" [(ngModel)]="filterObj.maxDepth"  />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <img src="../assets/images/dimensions.png" alt="Dimensions" class="img-responsive center-block img-avatar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading"><strong> Compliance & Certificates:</strong></div>
+                                <div class="panel-body">
+                                    <div class="col-md-8 ">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="control-label">Materials:</label>
+                                                <div>
+                                                    <span *ngFor="let material of materialList">
+                                                        <input type="checkbox"
+                                                            (change)="materialCheckbox($event.target.checked, material)" />{{material}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="control-label">Ingress Protection:</label>
+                                                <div>
+                                                    <span *ngFor="let ingress of ingressList">
+                                                        <input type="checkbox" 
+                                                            (change)="ingressCheckbox($event.target.checked, ingress)"/>{{ingress}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="control-label">Series:</label>
+                                                <div>
+                                                    <span *ngFor="let serie of serieList">
+                                                        <input type="checkbox" 
+                                                            (change)="serieCheckbox($event.target.checked, serie)"/>{{serie}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="control-label">Outdoor Use:</label>
+                                                <div>
+                                                    <input type="radio" name="outdoorUse" [(ngModel)]="filterObj.outdoorUse" [value]="true"> Yes
+                                                    <input type="radio" name="outdoorUse" [(ngModel)]="filterObj.outdoorUse" [value]="false"> No
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="control-label">UL Approval:</label>
+                                                <div>
+                                                    <input type="radio" name="ulApproval" [(ngModel)]="filterObj.ulApproval" [value]="true"> Yes
+                                                    <input type="radio" name="ulApproval" [(ngModel)]="filterObj.ulApproval" [value]="false"> No
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="control-label">NEMA 4X:</label>
+                                                <div>
+                                                    <input type="radio" name="nema4X" [(ngModel)]="filterObj.nema4X" [value]="true"> Yes
+                                                    <input type="radio" name="nema4X" [(ngModel)]="filterObj.nema4X" [value]="false"> No
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default"
+                        [disabled]="!filterObj.minLength && !filterObj.maxLength && !filterObj.minWidth && !filterObj.maxWidth && 
+                                    !filterObj.minDepth && !filterObj.maxDepth && (filterObj.materialList.length == 0) &&
+                                    (filterObj.ingressList.length == 0) && (filterObj.seriesList.length == 0) &&
+                                    !filterObj.outdoorUse && !filterObj.ulApproval && !filterObj.nema4X"  
+                        (click)="searchEnclosuresBySpecifications(specificationsForm)">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Submit
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
