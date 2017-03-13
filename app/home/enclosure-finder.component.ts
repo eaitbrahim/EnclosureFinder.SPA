@@ -24,7 +24,7 @@ export class EnclosureFinderComponent implements OnInit {
     specificationsToFind: IFilter;
     enclosuresLoaded: boolean = false;
     enclosuresNotFound: boolean = false;
-    public itemsPerPage: number = 3;
+    public itemsPerPage: number = 20;
     public totalItems: number = 0;
     public currentPage: number = 1;
  
@@ -42,7 +42,7 @@ export class EnclosureFinderComponent implements OnInit {
     animation: boolean = true;
     keyboard: boolean = true;
     backdrop: string | boolean = true;
- 
+    
     constructor(private route: ActivatedRoute,
         private router: Router,
         private dataService: DataService,

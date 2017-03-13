@@ -1,6 +1,6 @@
 <div class="panel panel-primary" [@flyInOut]="'in'">
     <div class="panel-heading">
-        <h3 class="panel-title pull-left">{{enclosure.partNumber}}</h3>
+        <h3 class="panel-title pull-left">Part Number: {{enclosure.partNumber}}</h3>
         <div class="clearfix"></div>
     </div>
  
@@ -11,20 +11,40 @@
             </div>
 
             <div class="col-md-8 caption">
-                <p>{{enclosure.typeNumber}}</p>
-                <p>{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}} mm</p>
-                <p>{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}} in</p>
-                <p>{{enclosure.ingressProtection}}</p>
-                <div [class.hidden]="!(enclosure.ulApproval)"><span class="badge">UL</span></div>
-                <p>{{enclosure.description}}</p>
+                <div class="row">
+                    <div class="col-md-3"><label class="control-label">Type Number:</label></div>
+                    <div class="col-md-4">{{enclosure.typeNumber}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><label class="control-label">Dimensions:</label></div>
+                    <div class="col-md-5">{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}} mm</div>
+                    <div class="col-md-4">(L x W x D)</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 col-md-offset-3">{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}} in</div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><label class="control-label">IP:</label></div>
+                    <div class="col-md-3">{{enclosure.ingressProtection}}</div>
+                </div>
+                <div class="row" [class.hidden]="!(enclosure.ulApproval)">
+                    <div class="col-md-3"><label class="control-label">UL Approval:</label></div>
+                    <div class="col-md-3"><span class="badge">UL</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><label class="control-label">Description:</label></div>
+                    <div class="col-md-9">{{enclosure.description}}</div>
+                </div>
             </div>
         </div>
     </div>
     <div class="panel-footer">
-        <div>
+        <div class=" pull-right">
             <button class="btn btn-primary" (click)="viewEnclosureDetails(enclosure.id)">
             <i class="fa fa-info-circle" aria-hidden="true"></i>Details</button>  
         </div>
+        <div class="clearfix"></div>
     </div>
 </div>
 
@@ -35,38 +55,75 @@
                 <button type="button" class="close" aria-label="Close" (click)="hideChildModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h3 class="modal-title">{{enclosureDetails.partNumber}}</h3>
+                <h3 class="modal-title">Part Number: {{enclosureDetails.partNumber}}</h3>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{{enclosureDetails.imageUrl}}" class="img-responsive" alt="">
+                        <img src="{{enclosureDetails.imageUrl}}" class="img-responsive" alt="EnclosureImage">
                     </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6"><label class="control-label">Type Number:</label></div>
+                                    <div class="col-md-6">{{enclosureDetails.typeNumber}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label class="control-label">L x W x D mm:</label></div>
+                                    <div class="col-md-6">{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label class="control-label">L x W x D in:</label></div>
+                                    <div class="col-md-6">{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label class="control-label">Material:</label></div>
+                                    <div class="col-md-6">{{enclosureDetails.material}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label class="control-label">IP Protection:</label></div>
+                                    <div class="col-md-6">{{enclosureDetails.ingressProtection}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label class="control-label">Series:</label></div>
+                                    <div class="col-md-6">{{enclosureDetails.series}}</div>
+                                </div>
+                            </div>
 
-                    <div class="col-md-4">
-                        <p>{{enclosureDetails.typeNumber}}</p>
-                        <p>{{enclosureDetails.lengthIn}} x {{enclosureDetails.widthIn}} x {{enclosureDetails.depthIn}} in</p>
-                        <p>{{enclosureDetails.lengthMm}} x {{enclosureDetails.widthMm}} x {{enclosureDetails.depthMm}} mm</p>
-                        <p>{{enclosureDetails.material}}</p>
-                        <p>{{enclosureDetails.ingressProtection}}</p>
-                        <p>{{enclosureDetails.series}}</p>
-                        <p>{{enclosureDetails.description}}</p>
-                        <div [class.hidden]="!(enclosure.ulApproval)"><span class="badge">UL</span></div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div>
-                            <p>Outdoor Use: {{enclosureDetails.outdoorUse ? 'Yes' : 'No'}}</p>
-                            <p>UL Approval: {{enclosureDetails.ulApproval ? 'Yes' : 'No'}}</p>
-                            <p>Nema 4X: {{enclosureDetails.nema4X ? 'Yes' : 'No'}}</p>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6"><label class="control-label">Outdoor Use:</label></div>
+                                    <div class="col-md-6">{{enclosureDetails.outdoorUse ? 'Yes' : 'No'}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label class="control-label">UL Approval:</label></div> 
+                                    <div class="col-md-6">{{enclosureDetails.ulApproval ? 'Yes' : 'No'}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"><label class="control-label">Nema 4X:</label></div> 
+                                    <div class="col-md-6">{{enclosureDetails.nema4X ? 'Yes' : 'No'}}</div>
+                                </div>
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">Attached Files</div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12"><a href="{{enclosureDetails.pdfUrl}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF Link</a></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12"><a href="{{enclosureDetails.drawingUrl}}" target="_blank"><i class="fa fa-file-photo-o" aria-hidden="true"></i> Drawing Link</a></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12"><a href="{{enclosureDetails.modelUrl}}" target="_blank"><i class="fa fa-file-o" aria-hidden="true"></i> Model Link</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="panel panel-info">
-                            <div class="panel-heading">Attached Files</div>
-                            <p><a href="{{enclosureDetails.pdfUrl}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF Link</a></p>
-                            <p><a href="{{enclosureDetails.drawingUrl}}" target="_blank"><i class="fa fa-file-photo-o" aria-hidden="true"></i> Drawing Link</a></p>
-                            <p><a href="{{enclosureDetails.modelUrl}}" target="_blank"><i class="fa fa-file-o" aria-hidden="true"></i> Model Link</a></p>
+                        <div class="row">
+                            <div class="col-md-2"><label class="control-label">Description:</label></div>
+                            <div class="col-md-10">{{enclosure.description}}</div>
                         </div>
-                    </div>
                 </div>                
             </div>
         </div>
