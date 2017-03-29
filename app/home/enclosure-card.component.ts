@@ -49,7 +49,7 @@ export class EnclosureCardComponent implements OnInit {
     animation: boolean = true;
     keyboard: boolean = true;
     backdrop: string | boolean = true;
- 
+    
     constructor(
         private dataService: DataService,
         private itemsService: ItemsService,

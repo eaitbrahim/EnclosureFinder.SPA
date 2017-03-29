@@ -25,6 +25,13 @@
     -->
 </div>
 <hr/>
+<div *ngIf="!enclosures">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+        <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Loading...</label>
+    </div>
+    <div class="col-xs-4"></div>
+</div>
 <div class="alert alert-danger" *ngIf="enclosuresNotFound">
     Unfortunately we could find no enclosures which match to your criteria.
 </div>

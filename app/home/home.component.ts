@@ -39,19 +39,6 @@ export class HomeComponent implements OnInit  {
         this.router.navigate(['/enclosureFinder', 'BySpecifications']);
     }
 
-    disableSubmitBtn(){
-        var disabled = false;
-        if('undefined' === typeof this.filterObj.minLength && 'undefined' === typeof this.filterObj.maxLength && 
-            'undefined' === typeof this.filterObj.minWidth &&  'undefined' === typeof this.filterObj.maxWidth && 
-            'undefined' === typeof this.filterObj.minDepth && 'undefined' === typeof this.filterObj.maxDepth && 
-            this.filterObj.materialList.length == 0 && this.filterObj.ingressList.length == 0 && 
-            this.filterObj.seriesList.length == 0 && 'undefined' === typeof this.filterObj.outdoorUse && 
-            'undefined' === typeof this.filterObj.ulApproval && 'undefined' === typeof this.filterObj.nema4X){
-            disabled = true;
-        }
-        return disabled;
-    }
-
     materialCheckbox(isChecked: boolean, selectedItem: string){
         if(isChecked){
             this.itemsService.addItemToStart(this.filterObj.materialList, selectedItem);
@@ -73,6 +60,19 @@ export class HomeComponent implements OnInit  {
             this.itemsService.addItemToStart(this.filterObj.seriesList, selectedItem);
         }else{
             this.itemsService.removeItemFromArray(this.filterObj.seriesList, selectedItem);
+        }
+    }
+
+    submitSpecificationsForm(event, specificationsForm: NgForm) {
+        if(event.keyCode == 13) {
+            if(typeof this.filterObj.minLength === 'undefined' && typeof this.filterObj.maxLength === 'undefined' && 
+                typeof this.filterObj.minWidth === 'undefined' && typeof this.filterObj.maxWidth === 'undefined' && 
+                typeof this.filterObj.minDepth === 'undefined' && typeof this.filterObj.maxDepth === 'undefined' && 
+                this.filterObj.materialList.length == 0 && this.filterObj.ingressList.length == 0 && 
+                this.filterObj.seriesList.length == 0 && this.filterObj.outdoorUse == null && 
+                this.filterObj.ulApproval == null && this.filterObj.nema4X == null){
+                this.searchEnclosuresBySpecifications(specificationsForm);
+            }
         }
     }
 }
