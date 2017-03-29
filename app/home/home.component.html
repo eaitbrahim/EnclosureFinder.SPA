@@ -167,7 +167,7 @@
                         [disabled]="!filterObj.minLength && !filterObj.maxLength && !filterObj.minWidth && !filterObj.maxWidth && 
                                     !filterObj.minDepth && !filterObj.maxDepth && (filterObj.materialList.length == 0) &&
                                     (filterObj.ingressList.length == 0) && (filterObj.seriesList.length == 0) &&
-                                    !filterObj.outdoorUse && !filterObj.ulApproval && !filterObj.nema4X"   
+                                    filterObj.outdoorUse == null && filterObj.ulApproval == null && filterObj.nema4X == null"   
                         (click)="searchEnclosuresBySpecifications(specificationsForm)">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Submit
                     </button>
