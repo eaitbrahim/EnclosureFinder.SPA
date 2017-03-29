@@ -138,6 +138,7 @@ export class EnclosureFinderComponent implements OnInit {
     }
 
     pageChanged(event: any): void {
+        window.location.hash = '#top';
         this.currentPage = event.page;
         if(this.searchMethod == "ByPartNumber"){
             this.getEnclosuresByPartNumber();
@@ -148,7 +149,6 @@ export class EnclosureFinderComponent implements OnInit {
 
     public hideChildModal(): void {
         this.childModal.hide();
-        
     }
 
     back() {
