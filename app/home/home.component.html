@@ -9,7 +9,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <input type="text" placeholder="Part number if known (exact match or partial)." class="form-control" [(ngModel)]="partNumberToFind" name="partNumber" #partNumber="ngModel" required />
+                        <input type="text" placeholder="Part number if known (exact match or partial)." 
+                                class="form-control" [(ngModel)]="partNumberToFind" name="partNumber" 
+                                #partNumber="ngModel" required 
+                                (keyup.enter)="searchEnclosuresByPartNumber(partNumberForm)"/>
                     </div>
                 </div>
                 <div class="panel-footer">
@@ -92,9 +95,13 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-info">
-                                <div class="panel-heading"><strong> Compliance & Certificates:</strong></div>
+                                <div class="panel-heading"><strong> Attributes:</strong></div>
                                 <div class="panel-body">
                                     <div class="col-md-8 ">
+                                        <div class="info">
+                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                            Select as many options as needed.
+                                        </div>
                                         <div class="form-group">
                                             <div class="row">
                                                 <label class="control-label">Materials:</label>
@@ -160,7 +167,7 @@
                         [disabled]="!filterObj.minLength && !filterObj.maxLength && !filterObj.minWidth && !filterObj.maxWidth && 
                                     !filterObj.minDepth && !filterObj.maxDepth && (filterObj.materialList.length == 0) &&
                                     (filterObj.ingressList.length == 0) && (filterObj.seriesList.length == 0) &&
-                                    !filterObj.outdoorUse && !filterObj.ulApproval && !filterObj.nema4X"  
+                                    !filterObj.outdoorUse && !filterObj.ulApproval && !filterObj.nema4X"   
                         (click)="searchEnclosuresBySpecifications(specificationsForm)">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Submit
                     </button>

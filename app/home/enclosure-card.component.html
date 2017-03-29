@@ -11,6 +11,29 @@
             </div>
 
             <div class="col-md-8 caption">
+                <table>
+                    <tr>
+                        <td nowrap><small><label class="control-label">Type Number:</label></small></td>
+                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.typeNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td><small><label class="control-label">Dimensions:</label></small></td>
+                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}} mm</td>
+                    </tr>
+                    <tr>
+                        <td nowrap><small><label class="control-label">(L x W x D)</label></small></td>
+                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}} in</td>
+                    </tr>
+                    <tr>
+                        <td><small><label class="control-label">IP:</label></small></td>
+                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.ingressProtection}}</td>
+                    </tr>
+                    <tr>
+                        <td><small><label class="control-label">Description:</label></small></td>
+                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.description}}</td>
+                    </tr>
+                </table>
+                <!--
                 <div class="row">
                     <div class="col-md-3"><label class="control-label">Type Number:</label></div>
                     <div class="col-md-4">{{enclosure.typeNumber}}</div>
@@ -36,6 +59,7 @@
                     <div class="col-md-3"><label class="control-label">Description:</label></div>
                     <div class="col-md-9">{{enclosure.description}}</div>
                 </div>
+                -->
             </div>
         </div>
     </div>
