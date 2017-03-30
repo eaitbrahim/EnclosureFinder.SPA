@@ -15,27 +15,27 @@
                 <table>
                     <tr>
                         <td nowrap><small><label class="control-label">Type Number:</label></small></td>
-                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.typeNumber}}</td>
+                        <td style="margin: 5px 10px;">{{enclosure.typeNumber}}</td>
                     </tr>
                     <tr>
                         <td><small><label class="control-label">Dimensions:</label></small></td>
-                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}} mm</td>
+                        <td style="margin: 5px 10px;">{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}} mm</td>
                     </tr>
                     <tr>
                         <td nowrap><small><label class="control-label">(L x W x D)</label></small></td>
-                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}} in</td>
+                        <td style="margin: 5px 10px;">{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}} in</td>
                     </tr>
                     <tr>
                         <td><small><label class="control-label">IP:</label></small></td>
-                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.ingressProtection}}</td>
+                        <td style="margin: 5px 10px;">{{enclosure.ingressProtection}}</td>
                     </tr>
                     <tr [class.hidden]="!(enclosure.ulApproval)">
                         <td><small><label class="control-label">UL Approval:</label></small></td>
-                        <td style="padding: 5px 10px 5px 5px;"><span class="badge">UL</span></td>
+                        <td style="margin: 5px 10px;"><span class="badge">UL</span></td>
                     </tr>
                     <tr>
                         <td><small><label class="control-label">Description:</label></small></td>
-                        <td style="padding: 5px 10px 5px 5px;">{{enclosure.description}}</td>
+                        <td style="margin: 5px 10px;">{{enclosure.description}}</td>
                     </tr>
                 </table>
                 <!--
@@ -94,26 +94,26 @@
                     <div class="col-md-8">
                         <table>
                             <tr>
-                                <td><label class="control-label">Type Number:</label></td>
-                                <td>{{enclosureDetails.typeNumber}}</td>
-                                <td><label class="control-label">Outdoor Use:</label></td>
-                                <td>{{enclosureDetails.outdoorUse ? 'Yes' : 'No'}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">Type Number:</label></td>
+                                <td style="margin: 5px 10px;">{{enclosureDetails.typeNumber}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">Outdoor Use:</label></td>
+                                <td style="margin: 5px 10px;">{{enclosureDetails.outdoorUse ? 'Yes' : 'No'}}</td>
                             </tr>
                             <tr>
-                                <td><label class="control-label">L x W x D mm:</label></td>
-                                <td>{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}}</td>
-                                <td><label class="control-label">UL Approval:</label></td>
-                                <td>{{enclosureDetails.ulApproval ? 'Yes' : 'No'}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">L x W x D mm:</label></td>
+                                <td style="margin: 5px 10px;">{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">UL Approval:</label></td>
+                                <td style="margin: 5px 10px;">{{enclosureDetails.ulApproval ? 'Yes' : 'No'}}</td>
                             </tr>
                             <tr>
-                                <td><label class="control-label">L x W x D in:</label></td>
-                                <td>{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}}</td>
-                                <td><label class="control-label">Nema 4X:</label></td>
-                                <td>{{enclosureDetails.nema4X ? 'Yes' : 'No'}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">L x W x D in:</label></td>
+                                <td style="margin: 5px 10px;">{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">Nema 4X:</label></td>
+                                <td style="margin: 5px 10px;">{{enclosureDetails.nema4X ? 'Yes' : 'No'}}</td>
                             </tr>
                             <tr>
-                                <td><label class="control-label">Material:</label></td>
-                                <td>{{enclosureDetails.material}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">Material:</label></td>
+                                <td style="margin: 5px 10px;">{{enclosureDetails.material}}</td>
                                 <td colspan="2" rowspan="3">
                                     <div class="panel panel-info">
                                         <div class="panel-heading">Attached Files</div>
@@ -132,16 +132,16 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label class="control-label">IP Protection:</label></td>
-                                <td>{{enclosureDetails.ingressProtection}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">IP Protection:</label></td>
+                                <td style="margin: 5px 10px;">{{enclosureDetails.ingressProtection}}</td>
                             </tr>
                             <tr>
-                                <td><label class="control-label">Series:</label></td>
-                                <td>{{enclosureDetails.series}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">Series:</label></td>
+                                <td style="margin: 5px 10px;">{{enclosureDetails.series}}</td>
                             </tr>
                             <tr>
-                                <td><label class="control-label">Description:</label></td>
-                                <td colspan="3">{{enclosure.description}}</td>
+                                <td style="padding-right: 10px;"><label class="control-label">Description:</label></td>
+                                <td colspan="3" style="margin: 5px 10px;">{{enclosure.description}}</td>
                             </tr>
                         </table>
                 </div>                
