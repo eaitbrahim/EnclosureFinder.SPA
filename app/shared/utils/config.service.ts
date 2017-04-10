@@ -7,7 +7,7 @@ export class ConfigService {
  
     constructor() {
         //this._apiURI = 'http://localhost:64183/api/';
-        this._apiURI = 'http://enclosuresfinderwebapi.azurewebsites.net/api/';
+        this._apiURI = 'http://enclosure.altechcorp.com/api/';
      }
  
      getApiURI() {

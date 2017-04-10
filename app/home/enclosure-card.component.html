@@ -14,27 +14,27 @@
             <div class="col-md-8 caption">
                 <table>
                     <tr>
-                        <td nowrap><small><label class="control-label">Type Number:</label></small></td>
+                        <td style="padding-right: 10px;"><small><label class="control-label">Type Number:</label></small></td>
                         <td style="margin: 5px 10px;">{{enclosure.typeNumber}}</td>
                     </tr>
                     <tr>
-                        <td><small><label class="control-label">Dimensions:</label></small></td>
+                        <td style="padding-right: 10px;"><small><label class="control-label">Dimensions:</label></small></td>
                         <td style="margin: 5px 10px;">{{enclosure.lengthMm}} x {{enclosure.widthMm}} x {{enclosure.depthMm}} mm</td>
                     </tr>
                     <tr>
-                        <td nowrap><small><label class="control-label">(L x W x D)</label></small></td>
+                        <td style="padding-right: 10px;"><small><label class="control-label">(L x W x D)</label></small></td>
                         <td style="margin: 5px 10px;">{{enclosure.lengthIn}} x {{enclosure.widthIn}} x {{enclosure.depthIn}} in</td>
                     </tr>
                     <tr>
-                        <td><small><label class="control-label">IP:</label></small></td>
+                        <td style="padding-right: 10px;"><small><label class="control-label">IP:</label></small></td>
                         <td style="margin: 5px 10px;">{{enclosure.ingressProtection}}</td>
                     </tr>
                     <tr [class.hidden]="!(enclosure.ulApproval)">
-                        <td><small><label class="control-label">UL Approval:</label></small></td>
+                        <td style="padding-right: 10px;"><small><label class="control-label">UL Approval:</label></small></td>
                         <td style="margin: 5px 10px;"><span class="badge">UL</span></td>
                     </tr>
                     <tr>
-                        <td><small><label class="control-label">Description:</label></small></td>
+                        <td style="padding-right: 10px;"><small><label class="control-label">Description:</label></small></td>
                         <td style="margin: 5px 10px;">{{enclosure.description}}</td>
                     </tr>
                 </table>
