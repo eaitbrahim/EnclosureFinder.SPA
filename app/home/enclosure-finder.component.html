@@ -1,11 +1,10 @@
 <div class="row">
-    <a name="top"></a>
     <div class="col-md-1">
         <button type="button" class="btn btn-danger" (click)="back()">
             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>Back
         </button>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <button type="button" class="btn btn-primary" *ngIf="enclosures">
             <i class="fa fa-calendar" aria-hidden="true"></i> Enclosures found  
             <span class="badge">{{totalItems}}</span>
@@ -26,7 +25,7 @@
     -->
 </div>
 <hr/>
-<div *ngIf="!enclosures">
+<div *ngIf="!enclosuresLoaded">
     <div class="col-xs-4"></div>
     <div class="col-xs-4">
         <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Loading...</label>
@@ -61,8 +60,10 @@
     </div>
 </div>
 -->
-<div class="row" *ngFor="let enclosure of enclosures">
-    <enclosure-card [enclosure]="enclosure"></enclosure-card>
+<div class="row" *ngIf="enclosuresLoaded">
+    <div class="row" *ngFor="let enclosure of enclosures">
+        <enclosure-card [enclosure]="enclosure"></enclosure-card>
+    </div>
 </div>
 <div class="row text-center" *ngIf="enclosures">
     <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" class="pagination-sm"

@@ -51,6 +51,7 @@ export class EnclosureFinderComponent implements OnInit {
         private configService: ConfigService) { }
  
     ngOnInit() {
+        window.location.hash = '#top';
         this.apiHost = this.configService.getApiHost();
         this.searchMethod = this.route.snapshot.params['searchMethod'];
         if(this.searchMethod == "ByPartNumber"){
@@ -75,7 +76,6 @@ export class EnclosureFinderComponent implements OnInit {
                 if(this.totalItems == 0){
                     this.enclosuresNotFound = true;
                 }
-                document.body.scrollTop = 0;
             },
             error => {
                 this.notificationService.printErrorMessage('Failed to load enclosures. ' + error);
@@ -91,7 +91,6 @@ export class EnclosureFinderComponent implements OnInit {
                 if(this.totalItems == 0){
                     this.enclosuresNotFound = true;
                 }
-                document.body.scrollTop = 0;
             },
             error => {
                 this.notificationService.printErrorMessage('Failed to load enclosures. ' + error);
@@ -138,13 +137,15 @@ export class EnclosureFinderComponent implements OnInit {
     }
 
     pageChanged(event: any): void {
-        window.location.hash = '#top';
+        window.location.hash = '';
+        this.enclosuresLoaded = false;
         this.currentPage = event.page;
         if(this.searchMethod == "ByPartNumber"){
             this.getEnclosuresByPartNumber();
         }else{
             this.getEnclosuresBySpecifications();
         }
+        window.location.hash = '#top';
     };
 
     public hideChildModal(): void {

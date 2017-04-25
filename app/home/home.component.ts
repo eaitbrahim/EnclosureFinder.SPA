@@ -20,13 +20,28 @@ export class HomeComponent implements OnInit  {
          private dataService: DataService) { }
  
     ngOnInit() {
-        this.partNumberToFind = '';
         this.materialList = ['ABS', 'Aluminum', 'Polypropylene', 'Polycarbonate', 'Polystyrene'];
         this.ingressList = ['IP55', 'IP65', 'IP66', 'IP67'];
         this.serieList = ['TK', 'TG', 'AL', 'EK', 'AK', 'Abox', 'AKL', 'HP', 'PB'];
-        this.filterObj = {dimensionUnit: 'mm', materialList: [], ingressList: [], seriesList: []};
+        this.partNumberToFind = this.dataService.getPartNumberToFind();
+        var specificationsToFind = this.dataService.getSpecificationsToFind();
+        if(typeof specificationsToFind != 'undefined'){
+            this.filterObj = specificationsToFind;
+        }else{
+            this.filterObj = {dimensionUnit: 'in', materialList: [], ingressList: [], seriesList: []};
+        }
+        
+        console.log(this.filterObj);
     }
- 
+    
+    clearPartNumber(){
+        this.partNumberToFind = '';
+    }
+
+    clearSpecifications(){
+        this.filterObj = {dimensionUnit: 'in', materialList: [], ingressList: [], seriesList: []};
+    }
+
     searchEnclosuresByPartNumber(partNumberForm: NgForm) {
         console.log(partNumberForm.value);
         this.dataService.setPartNumber(this.partNumberToFind);
@@ -47,6 +62,13 @@ export class HomeComponent implements OnInit  {
         }
     }
 
+    isMaterialChecked(item: string){
+        if(this.filterObj.materialList.indexOf(item) == -1){
+            return false;
+        }
+        return true;
+    }
+
     ingressCheckbox(isChecked: boolean, selectedItem: string){
         if(isChecked){
             this.itemsService.addItemToStart(this.filterObj.ingressList, selectedItem);
@@ -55,12 +77,26 @@ export class HomeComponent implements OnInit  {
         }
     }
 
+    isIngressChecked(item: string){
+        if(this.filterObj.ingressList.indexOf(item) == -1){
+            return false;
+        }
+        return true;
+    }
+
     serieCheckbox(isChecked: boolean, selectedItem: string){
         if(isChecked){
             this.itemsService.addItemToStart(this.filterObj.seriesList, selectedItem);
         }else{
             this.itemsService.removeItemFromArray(this.filterObj.seriesList, selectedItem);
         }
+    }
+
+    isSerieChecked(item: string){
+        if(this.filterObj.seriesList.indexOf(item) == -1){
+            return false;
+        }
+        return true;
     }
 
     submitSpecificationsForm(event, specificationsForm: NgForm) {

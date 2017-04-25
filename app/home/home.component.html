@@ -20,6 +20,9 @@
                         (click)="searchEnclosuresByPartNumber(partNumberForm)">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Submit
                     </button>
+                    <button type="button" class="btn btn-default" [disabled]="!partNumberToFind" (click)="clearPartNumber()">
+                        <i class="fa fa-times" aria-hidden="true"></i>Clear
+                    </button>
                 </div>
             </div>
         </form>
@@ -108,7 +111,7 @@
                                                 <label class="control-label">Materials:</label>
                                                 <div>
                                                     <span *ngFor="let material of materialList">
-                                                        <input type="checkbox"
+                                                        <input type="checkbox" [checked]="isMaterialChecked(material)"
                                                             (change)="materialCheckbox($event.target.checked, material)" />{{material}}
                                                     </span>
                                                 </div>
@@ -117,7 +120,7 @@
                                                 <label class="control-label">Ingress Protection:</label>
                                                 <div>
                                                     <span *ngFor="let ingress of ingressList">
-                                                        <input type="checkbox" 
+                                                        <input type="checkbox" [checked]="isIngressChecked(ingress)"
                                                             (change)="ingressCheckbox($event.target.checked, ingress)"/>{{ingress}}
                                                     </span>
                                                 </div>
@@ -126,7 +129,7 @@
                                                 <label class="control-label">Series:</label>
                                                 <div>
                                                     <span *ngFor="let serie of serieList">
-                                                        <input type="checkbox" 
+                                                        <input type="checkbox" [checked]="isSerieChecked(serie)"
                                                             (change)="serieCheckbox($event.target.checked, serie)"/>{{serie}}
                                                     </span>
                                                 </div>
@@ -171,6 +174,13 @@
                                     filterObj.outdoorUse == null && filterObj.ulApproval == null && filterObj.nema4X == null"   
                         (click)="searchEnclosuresBySpecifications(specificationsForm)">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Submit
+                    </button>
+                    <button type="button" class="btn btn-default" [disabled]="!filterObj.minLength && !filterObj.maxLength && !filterObj.minWidth && !filterObj.maxWidth && 
+                                    !filterObj.minDepth && !filterObj.maxDepth && (filterObj.materialList.length == 0) &&
+                                    (filterObj.ingressList.length == 0) && (filterObj.seriesList.length == 0) &&
+                                    filterObj.outdoorUse == null && filterObj.ulApproval == null && filterObj.nema4X == null"    
+                                    (click)="clearSpecifications()">
+                        <i class="fa fa-times" aria-hidden="true"></i>Clear
                     </button>
                 </div>
             </div>

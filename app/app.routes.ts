@@ -7,10 +7,8 @@ import { EnclosureEditComponent } from './enclosures/enclosure-edit.component';
 import { EnclosureAddComponent } from './enclosures/enclosure-add.component';
  
 const appRoutes: Routes = [
-    { path: 'enclosures', component: EnclosureListComponent },
-    { path: 'enclosures/:id/edit', component: EnclosureEditComponent },
-    { path: 'enclosures/add', component: EnclosureAddComponent },
-    { path: '', component: HomeComponent },
+    { path: 'enclosureFinder/enclosures', component: EnclosureListComponent },
+    { path: 'enclosureFinder/', component: HomeComponent },
     { path: 'enclosureFinder/:searchMethod', component: EnclosureFinderComponent}
 ];
  
